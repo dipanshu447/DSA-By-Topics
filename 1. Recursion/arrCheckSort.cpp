@@ -9,13 +9,13 @@ bool checkSort(int a[], int n)
         return true;
     }
 
-    return (a[n - 1] < a[n - 2] ? false : checkSort(a, n - 2));
+    return (a[n - 1] < a[n - 2] ? false : checkSort(a, n - 1));
 }
 
 int main()
 {
 
-    int a[] = {23, 34, 56, 78, 24};
+    int a[] = {23, 34, 67, 78, 264};
     int n = sizeof(a) / sizeof(a[0]);
     bool check = checkSort(a, n);
     if (check == true)
