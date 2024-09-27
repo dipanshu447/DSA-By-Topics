@@ -22,6 +22,12 @@ public:
     // function to traverse the singly linked list
     void traversal()
     {
+        if (head == nullptr)
+        {
+            cout << "Linked List is empty or deleted" << endl;
+            return;
+        }
+        
         Node *current = head;
         while (current != nullptr)
         {
@@ -79,7 +85,7 @@ public:
         }
     }
 
-    /* Add a node at a given position by the user and it can also add node at the beginning of the list too if user gave head position 
+    /* Add a node at a given position by the user and it can also add node at the beginning of the list too if user gave head position
     NOTE : it is assumed the head is set already it can't set the head position but it can add node at the beginning of list */
     void insertAtGivenPosition(int data, int position)
     {
@@ -118,7 +124,7 @@ public:
         return current;
     }
 
-    /* Add a node at a given value by the user and it can also add node at the beginning of the list too if user gave head value 
+    /* Add a node at a given value by the user and it can also add node at the beginning of the list too if user gave head value
     NOTE : it is assumed the head is set already it can't set the head value but it can add node at the beginning of list */
     void insertAtGivenValue(int data, int value)
     {
@@ -164,7 +170,47 @@ public:
         prevNode->next = newnode;
     }
 
-    // deletion functions
+    void deleteFirstNode()
+    {
+        Node *temp;
+        if (head == nullptr)
+        {
+            return;
+        }
+        temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    void deleteLastNode()
+    {
+        if (head == nullptr)
+        {
+            return;
+        }
+
+        Node *current = head;
+        Node *temp = current->next;
+        while (temp->next != nullptr)
+        {
+            current = current->next;
+            temp = temp->next;
+        }
+        current->next = nullptr;
+        delete temp;
+    }
+
+    void deleteLinkedList()
+    {
+        Node *del = head;
+        while (del != nullptr)
+        {
+            Node *temp = del;
+            del = del->next;
+            delete temp;
+        }
+        head = nullptr;
+    }
 };
 
 int main()
@@ -176,13 +222,18 @@ int main()
     list.insertAtEnd(30);
     list.insertAtEnd(40);
     list.insertAtEnd(50);
-
-    list.traversal();
-    cout << endl;
     // list.insertAtGivenPosition(60, 3);
     // list.insertAtGivenValue(60, 40);
     list.insertAfterGivenValue(60, 40);
     list.traversal();
 
+    list.deleteFirstNode();
+    list.deleteLastNode();
+    cout << endl;
+    list.traversal();
+    cout << endl;
+    list.deleteLinkedList();
+
+    list.traversal();
     return 0;
 }
