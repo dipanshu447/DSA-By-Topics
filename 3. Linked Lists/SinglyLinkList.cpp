@@ -27,13 +27,14 @@ public:
             cout << "Linked List is empty or deleted" << endl;
             return;
         }
-        
+
         Node *current = head;
         while (current != nullptr)
         {
             cout << current->data << " -> ";
             current = current->next;
         }
+        cout << "nullptr" << endl;
     }
 
     // function to return the size of linked list
@@ -104,11 +105,6 @@ public:
             prev = prev->next;
         }
 
-        if (prev == nullptr)
-        {
-            cout << "ERORRR CANT MAKE A NEW NODE" << endl;
-        }
-
         newnode->next = prev->next;
         prev->next = newnode;
     }
@@ -170,6 +166,7 @@ public:
         prevNode->next = newnode;
     }
 
+    // it deletes first node
     void deleteFirstNode()
     {
         Node *temp;
@@ -180,8 +177,10 @@ public:
         temp = head;
         head = head->next;
         delete temp;
+        temp = nullptr;
     }
 
+    // it deletes last node 
     void deleteLastNode()
     {
         if (head == nullptr)
@@ -189,17 +188,113 @@ public:
             return;
         }
 
+        if (head->next == nullptr)
+        {
+            delete head;
+            head = nullptr;
+            return;
+        }
+        
+
         Node *current = head;
         Node *temp = current->next;
         while (temp->next != nullptr)
         {
-            current = current->next;
+            // both of them will work as they both keep the track of prev node
+            current = temp;
+            // current = current->next;
             temp = temp->next;
         }
         current->next = nullptr;
         delete temp;
+        temp = nullptr;     
     }
 
+    // it deletes a node from the given position
+    void deleteAtGivenPosition(int position)
+    {
+        int k = 1;
+        if (head == nullptr)
+        {
+            cout << "List is empty!" << endl;
+            return;
+        }
+
+        Node *current = head;
+        Node *prev;
+        if (position == 1)
+        {
+            head = head->next;
+            delete current;
+            return;
+        }
+        else
+        {
+            while (current != nullptr && k < position)
+            {
+                k++;
+                prev = current;
+                current = current->next;
+            }
+
+            if (current == nullptr)
+            {
+                cout << "Position doesnt exist!!" << endl;
+                return;
+            }
+            else
+            {
+                prev->next = current->next;
+                delete current;
+            }
+            return;
+        }
+    }
+
+    // it delete the node from the given value by finding that node using findNode()
+    void deleteGivenValue(int value)
+    {
+        Node *prev = head;
+        Node *delNode = findNode(value);
+        if (delNode == nullptr)
+        {
+            cout << "Node not found!!" << endl;
+            return;
+        }
+        
+        if (delNode == head)
+        {
+            head = head->next;
+            delete delNode;
+            return;
+        }
+
+        while (prev->next != delNode && prev->next != nullptr)
+        {
+            prev = prev->next;
+        }
+
+        prev->next = delNode->next;
+        delete delNode;
+    }
+
+    // it delete the nodes which comes after that given value node
+    void deleteAfterGivenValue(int value)
+    {
+        Node *del = head;
+        Node *prevNode = findNode(value);
+
+        if (prevNode == nullptr || prevNode->next == nullptr)
+        {
+            return;
+        }
+
+        del = prevNode->next;
+        prevNode->next = del->next;
+        delete del;
+    }
+
+    // it deletes the entire linked list
     void deleteLinkedList()
     {
         Node *del = head;
@@ -229,11 +324,14 @@ int main()
 
     list.deleteFirstNode();
     list.deleteLastNode();
+    // list.deleteAtGivenPosition(1);
+    // list.deleteAfterGivenValue(30);
+    list.deleteGivenValue(40);
     cout << endl;
     list.traversal();
-    cout << endl;
-    list.deleteLinkedList();
+    // cout << endl;
+    // list.deleteLinkedList();
 
-    list.traversal();
+    // list.traversal();
     return 0;
 }
