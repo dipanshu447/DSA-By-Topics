@@ -140,11 +140,6 @@ public:
             prev = prev->next;
         }
 
-        if (prev == nullptr)
-        {
-            cout << "ERORRR CANT MAKE A NEW NODE" << endl;
-        }
-
         newnode->next = prev->next;
         prev->next = newnode;
     }
@@ -318,17 +313,17 @@ int main()
     list.insertAtEnd(40);
     list.insertAtEnd(50);
     // list.insertAtGivenPosition(60, 3);
-    // list.insertAtGivenValue(60, 40);
-    list.insertAfterGivenValue(60, 40);
+    list.insertAtGivenValue(60, 40);
+    // list.insertAfterGivenValue(60, 40);
     list.traversal();
 
-    list.deleteFirstNode();
-    list.deleteLastNode();
+    // list.deleteFirstNode();
+    // list.deleteLastNode();
     // list.deleteAtGivenPosition(1);
     // list.deleteAfterGivenValue(30);
-    list.deleteGivenValue(40);
-    cout << endl;
-    list.traversal();
+    // list.deleteGivenValue(40);
+    // cout << endl;
+    // list.traversal();
     // cout << endl;
     // list.deleteLinkedList();
 
