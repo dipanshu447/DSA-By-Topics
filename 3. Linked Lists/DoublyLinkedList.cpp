@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+
 class Node
 {
 public:
@@ -81,6 +82,7 @@ public:
         current->next = newnode;
     }
 
+    // insert the node at the given position inputed by user
     void insertAtGivenPosition(int data, int position)
     {
         Node *newNode = new Node(data);
@@ -122,6 +124,7 @@ public:
         prev->next = newNode;
     }
 
+    // fucntion to a node using the given value
     Node *findNode(int value)
     {
         Node *current = head;
@@ -132,6 +135,7 @@ public:
         return current;
     }
 
+    // inserts a node at the given value using findNode()
     void insertAtGivenValue(int data, int value)
     {
         Node *newNode = new Node(data);
@@ -167,6 +171,7 @@ public:
         GivenNode->prev = newNode;
     }
 
+    // inserts a node after the given value node
     void insertAfterGivenValue(int data, int value)
     {
         Node *newNode = new Node(data);
@@ -187,6 +192,163 @@ public:
             newNode->next->prev = newNode;
         }
     }
+
+    // it deletes the first node
+    void deleteFirst()
+    {
+        if (head == nullptr)
+        {
+            cout << "Doubly Linked list is empty!!" << endl;
+        }
+
+        Node *temp = head;
+
+        head = head->next;
+        head->prev = nullptr;
+        delete temp;
+    }
+
+    // it deletes the last node of doubly linked list
+    void deleteLast()
+    {
+
+        if (head == nullptr)
+        {
+            cout << "Doubly Linked list is empty!!" << endl;
+        }
+
+        Node *temp, *current = head;
+
+        while (current->next != nullptr)
+        {
+            current = current->next;
+        }
+
+        temp = current->prev;
+        temp->next = current->next;
+        delete current;
+    }
+
+    // it deletes the node from the given position by user
+    void deleteAtGivenPosition(int position)
+    {
+        Node *prev, *del = head;
+        int k = 1;
+        if (head == nullptr)
+        {
+            cout << "Doubly Linked List is empty!!!!" << endl;
+            return;
+        }
+
+        if (position == 1)
+        {
+            head = head->next;
+            if (head != nullptr)
+            {
+                head->prev = nullptr;
+            }
+
+            delete del;
+            return;
+        }
+
+        while (k < position && del->next != nullptr)
+        {
+            del = del->next;
+            k++;
+        }
+
+        if (del == nullptr)
+        {
+            cout << "Position not found" << endl;
+            return;
+        }
+
+        prev = del->prev;
+        prev->next = del->next;
+        if (del->next != nullptr)
+        {
+            del->next->prev = prev;
+        }
+        delete del;
+        return;
+    }
+
+    // it deletes the node from the given value node
+    void deleteAtGivenValue(int value)
+    {
+        if (head == nullptr)
+        {
+            cout << "Doubly Linked List is empty!!!!" << endl;
+            return;
+        }
+
+        Node *prev = head;
+        Node *GivenNode = findNode(value);
+
+        if (GivenNode == nullptr)
+        {
+            cout << "Node Not Found!!" << endl;
+            return;
+        }
+
+        if (GivenNode == head)
+        {
+            head = head->next;
+            if (head != nullptr)
+            {
+                head->prev = nullptr;
+            }
+
+            delete GivenNode;
+            return;
+        }
+
+        prev = GivenNode->prev;
+        prev->next = GivenNode->next;
+        if (GivenNode->next != nullptr)
+        {
+            GivenNode->next->prev = prev;
+        }
+        delete GivenNode;
+        return;
+    }
+
+    // it deletes the node after the given value node
+    void deleteAfterGivenValue(int value)
+    {
+        if (head == nullptr)
+        {
+            cout << "Doubly Linked List is empty!!!!" << endl;
+            return;
+        }
+
+        Node *GivenNode = findNode(value);
+
+        if (GivenNode == nullptr)
+        {
+            cout << "Node Not Found!!" << endl;
+            return;
+        }
+
+        Node *del = GivenNode->next;
+        if (del == nullptr)
+        {
+            cout << "You are at the end of doubly linked list!!" << endl;
+            return;
+        }
+        
+
+        GivenNode->next = del->next;
+
+        if (del->next != nullptr)
+        {
+            del->next->prev = GivenNode;
+        }
+
+        delete del;
+        return;
+    }
 };
 
 int main()
@@ -204,6 +366,13 @@ int main()
     list.insertAfterGivenValue(35, 30);
     list.insertAtEnd(70);
 
+    list.traversal();
+
+    // list.deleteFirst();
+    // list.deleteLast();
+    // list.deleteAtGivenPosition(7);
+    // list.deleteAtGivenValue(70);
+    list.deleteAfterGivenValue(70);
     list.traversal();
 
     return 0;
