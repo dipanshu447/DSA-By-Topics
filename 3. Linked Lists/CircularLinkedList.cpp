@@ -208,6 +208,85 @@ public:
         current->next = newNode;
     }
     // Note : we can apply findNode(), insertAtValue is pretty much same like these all functions
+
+    // delete the last node 
+    void deleteLastnode()
+    {
+        Node *temp, *current = head;
+
+        if (head == nullptr)
+        {
+            cout << "List is empty!" << endl;
+            return;
+        }
+
+        while (current->next != head)
+        {
+            temp = current;
+            current = current->next;
+        }
+
+        temp->next = current->next;
+        delete current;
+        return;
+    }
+
+    // delete the first node 
+    void deleteFirstNode(){
+        Node *temp, *current = head;
+
+        if (head == nullptr)
+        {
+            cout << "List is empty!" << endl;
+            return;
+        }
+
+        while (current->next != head)
+        {
+            current = current->next;
+        }
+
+        current->next = head->next;
+        head = head->next;
+        delete temp;
+        return;
+    }
+
+    // delete the node at specific position by user
+    void deleteAtPosition(int pos)
+    {
+        Node *prev,*current = head;
+        int k = 1;
+
+        if (head == nullptr)
+        {
+            cout << "List is empty!" << endl;
+            return;
+        }
+
+        if (pos == 1)
+        {
+            deleteFirstNode();
+            return;
+        }
+
+        while (k < pos && current->next != head)
+        {
+            prev = current;
+            current = current->next;
+            k++;
+        }
+
+        if (k < pos)
+        {
+            cout << "Invalid Position!" << endl;
+            return;
+        }
+
+        prev->next = current->next;
+        delete current;
+        return;
+    }
 };
 
 int main()
@@ -221,11 +300,17 @@ int main()
     list.insertAtBeginning(5);
     list.insertAtBeginning(3);
     // list.insertAtPosition(45, 7);
-    list.insertAfterGivenPosition(45,2);
+    list.insertAfterGivenPosition(45, 6);
     // list.insertAtEmptyList(10);
     // list.insertAtEmptyList(20);
     // list.insertAtEmptyList(40);
 
+    list.traversal();
+
+    // list.deleteFirstNode();
+    // list.deleteLastnode();
+    list.deleteAtPosition(6);
+    cout << endl;
     list.traversal();
 
     return 0;
