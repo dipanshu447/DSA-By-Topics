@@ -1,13 +1,18 @@
 #include <iostream>
 using namespace std;
 
+/*
+Doubly Linked List: A linear data structure where each node points to both the next and previous nodes,
+allowing two-way traversal.
+*/
 
+// Node class 
 class Node
 {
 public:
-    int data;
-    Node *next;
-    Node *prev;
+    int data; // data variable
+    Node *next; // pointer to the next node
+    Node *prev; // pointer to the previous node 
 
     Node(int data) : data(data), next(nullptr), prev(nullptr) {}
 };
@@ -124,7 +129,7 @@ public:
         prev->next = newNode;
     }
 
-    // fucntion to a node using the given value
+    // fucntion to find a node using the given value
     Node *findNode(int value)
     {
         Node *current = head;

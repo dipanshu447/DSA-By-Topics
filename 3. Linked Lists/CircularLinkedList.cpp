@@ -1,6 +1,11 @@
 #include <iostream>
 using namespace std;
 
+/*
+Circular Linked List: A linked list where the last node points back to the first node (or head),
+creating a continuous loop for traversal.
+*/
+
 class Node
 {
 public:

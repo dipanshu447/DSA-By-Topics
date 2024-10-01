@@ -1,6 +1,11 @@
 #include <iostream>
 using namespace std;
 
+/*
+Singly Linked List: A linear data structure where each node points to the next node, allowing one-way
+traversal from head to tail.
+*/
+
 // node class
 class Node
 {
@@ -175,7 +180,7 @@ public:
         temp = nullptr;
     }
 
-    // it deletes last node 
+    // it deletes last node
     void deleteLastNode()
     {
         if (head == nullptr)
@@ -189,7 +194,6 @@ public:
             head = nullptr;
             return;
         }
-        
 
         Node *current = head;
         Node *temp = current->next;
@@ -202,7 +206,7 @@ public:
         }
         current->next = nullptr;
         delete temp;
-        temp = nullptr;     
+        temp = nullptr;
     }
 
     // it deletes a node from the given position
@@ -256,7 +260,7 @@ public:
             cout << "Node not found!!" << endl;
             return;
         }
-        
+
         if (delNode == head)
         {
             head = head->next;
