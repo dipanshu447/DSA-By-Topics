@@ -35,3 +35,15 @@ public:
 };
 ```
 > _Circular Linked list has same node structure as Singly Linked list._
+
+#### Other Types of Linked List - 
+
+- A Memory-Efficient Linked List is more often called a **XOR Linked List** as this is totally dependent on the XOR Logic Gate and its properties.
+
+    - [Original Journal from Sinha About Memory Efficent Linked List](https://www.linuxjournal.com/article/6828?page=0,1)
+    - [Another Article with Implementation](https://cybercruddotnet.wordpress.com/2012/07/04/complicating-things-with-xor-linked-lists/)
+    - [StackOverFlow Discusstion](https://stackoverflow.com/questions/35841620/what-is-a-memory-efficient-doubly-linked-list-in-c)
+    
+> Note : It's rarely used in practice due to the complexity they introduce, especially in debugging and portability.
+
+
