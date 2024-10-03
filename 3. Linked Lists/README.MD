@@ -50,4 +50,6 @@ public:
     
     - [Lec 12 | MIT | By Prof. Erik Demaine Fall 2005 (Best Explaination)](https://www.youtube.com/watch?v=kBwUoWpeH_Q)
 
+    - [Skip Lists Notes by Erik D. Demaine and Charles E. Leiserson](Skip%20Lists.pdf)
+
     - [Geekforgeeks Article on Skip Lists](https://www.geeksforgeeks.org/skip-list/?ref=lbp)
