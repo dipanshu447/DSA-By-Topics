@@ -149,16 +149,15 @@ public:
         prev->next = newnode;
     }
 
-    // It adds a node after a given value node and it also can also add node at beginning of list (HEAD SHOULD BE SET ALREADY)
+    // It adds a node after a given value node and it also can also add node at beginning of list
     void insertAfterGivenValue(int data, int value)
     {
         Node *newnode = new Node(data);
         Node *prevNode = findNode(value);
 
-        if (prevNode == head)
+        if (head == nullptr)
         {
-            newnode->next = head;
-            head = newnode;
+            cout << "Linked list is empty!!" << endl;
             return;
         }
 
@@ -246,6 +245,7 @@ public:
                 prev->next = current->next;
                 delete current;
             }
+
             return;
         }
     }
@@ -317,17 +317,17 @@ int main()
     list.insertAtEnd(40);
     list.insertAtEnd(50);
     // list.insertAtGivenPosition(60, 3);
-    list.insertAtGivenValue(60, 40);
-    // list.insertAfterGivenValue(60, 40);
+    // list.insertAtGivenValue(60, 40);
+    list.insertAfterGivenValue(60, 10);
     list.traversal();
 
     // list.deleteFirstNode();
     // list.deleteLastNode();
-    // list.deleteAtGivenPosition(1);
+    list.deleteAtGivenPosition(3);
     // list.deleteAfterGivenValue(30);
     // list.deleteGivenValue(40);
-    // cout << endl;
-    // list.traversal();
+    cout << endl;
+    list.traversal();
     // cout << endl;
     // list.deleteLinkedList();
 

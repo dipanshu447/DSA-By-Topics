@@ -128,19 +128,6 @@ public:
         Node *newNode = new Node(data);
         int k = 1;
 
-        if (head == nullptr)
-        {
-            if (pos != 1)
-            {
-                cout << "Invalid Position!" << endl;
-                return;
-            }
-
-            head = newNode;
-            newNode->next = head;
-            return;
-        }
-
         if (pos == 1)
         {
             insertAtBeginning(data);
@@ -214,7 +201,7 @@ public:
     }
     // Note : we can apply findNode(), insertAtValue is pretty much same like these all functions
 
-    // delete the last node 
+    // delete the last node
     void deleteLastnode()
     {
         Node *temp, *current = head;
@@ -236,8 +223,9 @@ public:
         return;
     }
 
-    // delete the first node 
-    void deleteFirstNode(){
+    // delete the first node
+    void deleteFirstNode()
+    {
         Node *temp, *current = head;
 
         if (head == nullptr)
@@ -260,7 +248,7 @@ public:
     // delete the node at specific position by user
     void deleteAtPosition(int pos)
     {
-        Node *prev,*current = head;
+        Node *prev, *current = head;
         int k = 1;
 
         if (head == nullptr)
@@ -304,8 +292,8 @@ int main()
     list.insertAtEnd(40);
     list.insertAtBeginning(5);
     list.insertAtBeginning(3);
-    // list.insertAtPosition(45, 7);
-    list.insertAfterGivenPosition(45, 6);
+    list.insertAtPosition(45, 3);
+    // list.insertAfterGivenPosition(45, 3);
     // list.insertAtEmptyList(10);
     // list.insertAtEmptyList(20);
     // list.insertAtEmptyList(40);
