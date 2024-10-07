@@ -8,7 +8,7 @@ class stackArr
 {
 private:
     int arr[max]; // stack array
-    int top; // stack index
+    int top;      // stack index
 
 public:
     stackArr() : top(-1) {}
@@ -73,7 +73,21 @@ public:
         return arr[top];
     }
 
-    // reset the stack top 
+    // stack dont usually have a display operation but I made one to visualize a stack better
+    void display()
+    {
+        if (isEmpty())
+        {
+            return;
+        }
+
+        for (int i = top; i >= 0; i--)
+        {
+            cout << arr[i] << endl;
+        }
+    }
+
+    // reset the stack top
     void deleteStack()
     {
         top = -1;
@@ -91,9 +105,10 @@ int main()
     stack.push(40);
     stack.push(50);
     stack.push(60);
+    // cout << stack.peek() << endl;
 
-    cout << stack.peek() << endl;
     cout << stack.pop() << endl;
+    stack.display();
 
     return 0;
 }
