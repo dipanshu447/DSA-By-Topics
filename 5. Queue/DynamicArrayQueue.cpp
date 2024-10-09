@@ -1,25 +1,26 @@
 #include <iostream>
 using namespace std;
 
-#define max 1000
-#define QUEUE_ERROR_EMPTY -9999999
+#define QUEUE_ERROR_EMPTY -99999999
 
 class Queue
 {
 private:
-    int arr[max];
-    int front, rear;
+    int *arr;
+    int front, rear, QueueCapacity;
 
 public:
-    Queue() : front(-1), rear(-1) {}
-
-    // returns true if queue is full 
-    bool isFull()
+    Queue(int size) : front(-1), rear(-1), QueueCapacity(size)
     {
-        return (rear == (max - 1));
+        arr = new int[QueueCapacity];
     }
 
-    // returns true if queue is empty 
+    bool isFull()
+    {
+        return (rear == (QueueCapacity - 1));
+    }
+
+    // returns true if queue is empty
     bool isEmpty()
     {
         return (front == -1 || front > rear);
@@ -32,13 +33,29 @@ public:
     }
 
     // returns the element located at front
-    int frontElement(){
+    int frontElement()
+    {
         return arr[front];
     }
-    
+
     // returns the element located at rear
-    int rearElement(){
+    int rearElement()
+    {
         return arr[rear];
+    }
+
+    // doubles the size of queue
+    void doubleQueue()
+    {
+        int *newArr = new int[QueueCapacity * 2]; // making a new array with double size
+
+        for (int i = 0; i < QueueCapacity; i++) // copying all elments from old array to new array
+        {
+            newArr[i] = arr[i];
+        }
+
+        delete[] arr; // delete the pointer array memory
+        arr = newArr; // making arr point to new arr
     }
 
     // add a element in the queue
@@ -46,8 +63,9 @@ public:
     {
         if (isFull())
         {
-            cout << "Overflow!" << endl;
-            return;
+            // cout << "Overflow!" << endl;
+            doubleQueue();
+            // return;
         }
         if (front == -1)
         { // set front to 0 if its -1 so that it shows the queue is not empty otherwise it will create confusion
@@ -93,7 +111,9 @@ public:
         }
     }
 
-    void deleteQueue() {
+    void deleteQueue()
+    {
+        delete[] arr;
         front = -1;
         rear = -1;
     }
@@ -101,25 +121,21 @@ public:
 
 int main()
 {
-    Queue q;
+    Queue q(2); // size 2
 
     q.enqueue(10);
     q.enqueue(20);
     q.enqueue(30);
     q.enqueue(40);
-    q.enqueue(50);
-
+    // its working we added four elements in the queue whose size is 2 so doublequeue is working!!
     q.display();
 
-    // cout << "Dequeue elment : "<< q.dequeue() << endl;
-    // q.dequeue();
+    /*
+        rest of the program is same as simple array queue only difference is,
+            - it uses dynamic array with pointers
+            - it doubles the size of array if its getting full
+    */
 
-    // q.display();
-    cout << "Peeka Bo : " << q.peek() << endl;
-    cout << "Size : " << q.size() << endl;
-    cout << "Front element : " << q.frontElement() << endl;
-    cout << "Rear element : " << q.rearElement() << endl;
-  
     q.deleteQueue();
     q.display();
 
