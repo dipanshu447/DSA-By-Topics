@@ -19,11 +19,13 @@ class stack
 public:
     stack() : top(nullptr) {}
 
+    // returns true if stack is empty or false if not
     bool isEmpty()
     {
         return (top == nullptr);
     }
 
+    // returns the size of stack by traversing
     int size()
     {
         int count = 0;
@@ -42,6 +44,7 @@ public:
         return count;
     }
 
+    // traverse the stack and print its value (Note: This is not included in core operation of stack. Its only for visualizing the stack)
     void display(){
         if (isEmpty())
         {
@@ -57,6 +60,7 @@ public:
         }
     }
 
+    // push one element in stack
     void push(int data)
     {
         Node *newNode = new Node(data);
@@ -70,6 +74,7 @@ public:
         top = newNode;
     }
 
+    // pop one element from stack and returns the popped value 
     int pop()
     {
         if (isEmpty())
@@ -85,7 +90,18 @@ public:
         return delVal;
     }
 
-    void deleteStack() {}
+    // it deletes the stack by freeing all the nodes and resetting the top to null pointer
+    void deleteStack() {
+        Node *del;
+        Node *current = top;
+        while (current != nullptr)
+        {
+            del = current;
+            current = current->next;
+            delete del;
+        }
+        top = nullptr;
+    }
 };
 
 int main()
@@ -99,6 +115,8 @@ int main()
 
     cout << "Poped element : "<< s.pop() << endl;
 
+    s.display();
+    s.deleteStack();
     s.display();
 
     return 0;
