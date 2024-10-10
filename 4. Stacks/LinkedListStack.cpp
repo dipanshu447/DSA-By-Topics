@@ -97,6 +97,7 @@ public:
         while (current != nullptr)
         {
             del = current;
+            cout << "Deleted element : " << del->data << endl;
             current = current->next;
             delete del;
         }
