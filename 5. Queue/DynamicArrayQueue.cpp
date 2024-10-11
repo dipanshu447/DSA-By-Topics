@@ -55,6 +55,7 @@ public:
         }
 
         delete[] arr; // delete the pointer array memory
+        QueueCapacity *= 2; // update the new capacity of queue
         arr = newArr; // making arr point to new arr
     }
 
@@ -127,6 +128,8 @@ int main()
     q.enqueue(20);
     q.enqueue(30);
     q.enqueue(40);
+    q.enqueue(50);
+
     // its working we added four elements in the queue whose size is 2 so doublequeue is working!!
     q.display();
 
