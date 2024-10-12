@@ -149,7 +149,7 @@ public:
         prev->next = newnode;
     }
 
-    // It adds a node after a given value node and it also can also add node at beginning of list
+    // It adds a node after a given value node 
     void insertAfterGivenValue(int data, int value)
     {
         Node *newnode = new Node(data);
@@ -177,6 +177,7 @@ public:
         head = head->next;
         delete temp;
         temp = nullptr;
+        return;
     }
 
     // it deletes last node
