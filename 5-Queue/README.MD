@@ -17,6 +17,8 @@ A Queue is an ordered list in which insertions are done at one end (**rear**) an
 - Queue Dynamic Circular Array 
 - Queue Linked list
 
+> DEQueue or Double Ended Queue is a generalized version of Queue data structure that allows insert and delete at both ends.
+
 _There are more implementation but mostly these three are often used and important but others are good for you to develop deeper understanding of queues_
 
 > There are two more implemenatations : Simple array queue and Dynamic queue array but they are not efficient as these above implemenations. Still I have written their algorithms for understaning!
