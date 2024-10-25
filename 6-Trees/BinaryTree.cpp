@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 using namespace std;
 
 class TreeNode
@@ -16,60 +17,85 @@ class Tree
 private:
     TreeNode *root;
 
-public:
+    // void pre(TreeNode *rootNode){
+    //     if (rootNode != nullptr)
+    //     {
+    //         cout << rootNode->data << " ";
+    //         pre(rootNode->left);
+    //         pre(rootNode->right);
+    //     }
+    // }
+
+public: 
     Tree() : root(nullptr) {}
 
-    void insert(int value)
-    {
+    TreeNode *createNode(int data){
+        TreeNode *newNode = new TreeNode(data);
+        return newNode;
+    }
 
-        TreeNode *newNode = new TreeNode(value);
-        if (root == nullptr)
+    void pre(TreeNode *rootNode){
+        if (rootNode != nullptr)
         {
-            root = newNode;
-            return;
-        }
-
-        TreeNode *current = root;
-        TreeNode *prev = nullptr;
-
-        // traverse in the value order
-        while (current != nullptr)
-        {
-            prev = current;
-            if (value == current->data)
-            {
-                return; // cant be insert as its already inserted
-            }
-            else if (value < current->data)
-            {
-                current = current->left;
-            }
-            else
-            {
-                current = current->right;
-            }
-        }
-        // after reaching the node which is nullptr we link it to newnode
-        if (value < prev->data)
-        {
-            prev->left = newNode;
-        }
-        else
-        {
-            prev->right = newNode;
+            cout << rootNode->data << " ";
+            pre(rootNode->left);
+            pre(rootNode->right);
         }
     }
+
+    void inOrd(TreeNode *rootNode){
+        if (rootNode != nullptr)
+        {
+            inOrd(rootNode->left);
+            cout << rootNode->data << " ";
+            inOrd(rootNode->right);
+        }
+    }
+
+    void nonrecPre(TreeNode *Rootnode){
+        stack <TreeNode*>  s; // stack will store treenode pointers
+        while (true)
+        {
+            while (Rootnode != nullptr)
+            {
+                cout << Rootnode->data << " "; // print rootnode data
+                s.push(Rootnode); // push that rootnode into stack to later loop through that for its other sub trees
+                Rootnode = Rootnode->left; // root goes to left subtrees
+            }
+            if (s.empty()) // if stack is empty then it means we have checked all the root subtrees so it breaks the loop
+            {
+                break;
+            }
+            Rootnode = s.top(); // pop the sub tree node to loop through
+            s.pop();
+            Rootnode = Rootnode->right; // root goes to to its right subtrees
+        }
+    }
+
+    // void preOrder(){
+    //     pre(root);
+    // }
+    
 };
 
 int main()
 {
     Tree t;
 
-    t.insert(10);
-    t.insert(20);
-    t.insert(30);
+    TreeNode *n1 = t.createNode(10);
+    TreeNode *n2 = t.createNode(20);
+    TreeNode *n3 = t.createNode(30);
+    TreeNode *n4 = t.createNode(40);
 
+    n1->left = n2;
+    n1->right = n3;
+    n2->left = n4;
 
+    // t.pre(n1);
+    // cout << endl;
+    // t.nonrecPre(n1);
+
+    t.inOrd(n1);
 
     return 0;
 }
