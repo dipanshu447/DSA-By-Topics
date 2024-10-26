@@ -50,6 +50,6 @@ public:
     
     - [Lec 12 | MIT | By Prof. Erik Demaine Fall 2005 (Best Explaination)](https://www.youtube.com/watch?v=kBwUoWpeH_Q)
 
-    - [Skip Lists Explained!! By Sumit Kumar(Great Article)](https://blog.reachsumit.com/posts/2020/07/skip-list/#conclusion)
+    - [Skip Lists Explained!! By Sumit Kumar (Great Article)](https://blog.reachsumit.com/posts/2020/07/skip-list/#conclusion)
 
     - [Geekforgeeks Article on Skip Lists](https://www.geeksforgeeks.org/skip-list/?ref=lbp)
