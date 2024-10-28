@@ -44,6 +44,10 @@ public:
             pre(rootNode->right);
         }
     }
+    
+    // void preOrder(){
+    //     pre(root);
+    // }
 
     void inOrd(TreeNode *rootNode)
     {
@@ -54,7 +58,7 @@ public:
             inOrd(rootNode->right);
         }
     }
-    
+
     void post(TreeNode *rootNode)
     {
         if (rootNode != nullptr)
@@ -63,6 +67,37 @@ public:
             inOrd(rootNode->right);
             cout << rootNode->data << " ";
         }
+    }
+
+
+    void nonrecPost(TreeNode *Rootnode)
+    {
+        stack<TreeNode *> s; // stack will store treenode pointers
+        TreeNode *previous = nullptr; // track previous nodes
+        do // runs till stack is not empty
+        {
+            while (Rootnode != nullptr)
+            {
+                s.push(Rootnode);          // push that rootnode into stack to later loop through that for its other sub trees
+                Rootnode = Rootnode->left; // root goes to left subtrees
+            }
+            while (Rootnode == nullptr && !s.empty()) // processes the tree nodes
+            {
+                Rootnode = s.top(); // pop subtree from stack
+                if (Rootnode->right == nullptr || Rootnode->right == previous) // check if the right substree is already processed or empty
+                {
+                    cout << Rootnode->data << " "; // print node data
+                    s.pop();
+                    previous = Rootnode; // update previous 
+                    Rootnode = nullptr; // make rootnode null in order to make sure the loop runs next iterations
+                }
+                else
+                {
+                    Rootnode = Rootnode->right; // root goes to to its right subtrees
+                }
+            }
+
+        } while (!s.empty()); // continue till stack is empty
     }
 
     void nonrecInOrd(TreeNode *Rootnode)
@@ -85,6 +120,7 @@ public:
             Rootnode = Rootnode->right;    // root goes to to its right subtrees
         }
     }
+
     void nonrecPre(TreeNode *Rootnode)
     {
         stack<TreeNode *> s; // stack will store treenode pointers
@@ -106,14 +142,19 @@ public:
         }
     }
 
-    // void preOrder(){
-    //     pre(root);
-    // }
+    // do Level order Traversal tmrw
+
 };
 
 int main()
 {
     Tree t;
+    // treeeeeeee
+    //    10
+    //   /  \ 
+    //  20  30
+    //  /
+    // 40
 
     TreeNode *n1 = t.createNode(10);
     TreeNode *n2 = t.createNode(20);
@@ -132,7 +173,9 @@ int main()
     // cout << endl;
     // t.nonrecInOrd(n1);
 
-
+    t.post(n1);
+    cout << endl;
+    t.nonrecPost(n1);
 
     return 0;
 }
