@@ -26,15 +26,17 @@ private:
     //     }
     // }
 
-public: 
+public:
     Tree() : root(nullptr) {}
 
-    TreeNode *createNode(int data){
+    TreeNode *createNode(int data)
+    {
         TreeNode *newNode = new TreeNode(data);
         return newNode;
     }
 
-    void pre(TreeNode *rootNode){
+    void pre(TreeNode *rootNode)
+    {
         if (rootNode != nullptr)
         {
             cout << rootNode->data << " ";
@@ -43,7 +45,8 @@ public:
         }
     }
 
-    void inOrd(TreeNode *rootNode){
+    void inOrd(TreeNode *rootNode)
+    {
         if (rootNode != nullptr)
         {
             inOrd(rootNode->left);
@@ -51,16 +54,47 @@ public:
             inOrd(rootNode->right);
         }
     }
+    
+    void post(TreeNode *rootNode)
+    {
+        if (rootNode != nullptr)
+        {
+            inOrd(rootNode->left);
+            inOrd(rootNode->right);
+            cout << rootNode->data << " ";
+        }
+    }
 
-    void nonrecPre(TreeNode *Rootnode){
-        stack <TreeNode*>  s; // stack will store treenode pointers
+    void nonrecInOrd(TreeNode *Rootnode)
+    {
+        stack<TreeNode *> s; // stack will store treenode pointers
+        while (true)
+        {
+            while (Rootnode != nullptr)
+            {
+                s.push(Rootnode);          // push that rootnode into stack to later loop through that for its other sub trees
+                Rootnode = Rootnode->left; // root goes to left subtrees
+            }
+            if (s.empty()) // if stack is empty then it means we have checked all the root subtrees so it breaks the loop
+            {
+                break;
+            }
+            Rootnode = s.top(); // pop the sub tree node to loop through
+            s.pop();
+            cout << Rootnode->data << " "; // print rootnode data
+            Rootnode = Rootnode->right;    // root goes to to its right subtrees
+        }
+    }
+    void nonrecPre(TreeNode *Rootnode)
+    {
+        stack<TreeNode *> s; // stack will store treenode pointers
         while (true)
         {
             while (Rootnode != nullptr)
             {
                 cout << Rootnode->data << " "; // print rootnode data
-                s.push(Rootnode); // push that rootnode into stack to later loop through that for its other sub trees
-                Rootnode = Rootnode->left; // root goes to left subtrees
+                s.push(Rootnode);              // push that rootnode into stack to later loop through that for its other sub trees
+                Rootnode = Rootnode->left;     // root goes to left subtrees
             }
             if (s.empty()) // if stack is empty then it means we have checked all the root subtrees so it breaks the loop
             {
@@ -75,7 +109,6 @@ public:
     // void preOrder(){
     //     pre(root);
     // }
-    
 };
 
 int main()
@@ -95,7 +128,11 @@ int main()
     // cout << endl;
     // t.nonrecPre(n1);
 
-    t.inOrd(n1);
+    // t.inOrd(n1);
+    // cout << endl;
+    // t.nonrecInOrd(n1);
+
+
 
     return 0;
 }

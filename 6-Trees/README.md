@@ -40,6 +40,7 @@ A tree is called Binary tree if each node has zero child, one child or two child
 
 **Skew Binary Tree :** A tree which has only one child (expect leaf nodes), we call such trees skew trees. If every node has only left child then we call them left skew trees. Similarly, if every node has only right child then we call them right skew trees. Skew tree is also called **Degenerate Tree**.
 
+- [Tree Traversal Short and easy trick](https://youtu.be/XRcC7bAtL3c?si=epXDCoNOyA7e826z)
 
 
 
