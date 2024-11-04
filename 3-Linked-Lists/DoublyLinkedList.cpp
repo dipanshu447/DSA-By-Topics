@@ -6,13 +6,13 @@ Doubly Linked List: A linear data structure where each node points to both the n
 allowing two-way traversal.
 */
 
-// Node class 
+// Node class
 class Node
 {
 public:
-    int data; // data variable
+    int data;   // data variable
     Node *next; // pointer to the next node
-    Node *prev; // pointer to the previous node 
+    Node *prev; // pointer to the previous node
 
     Node(int data) : data(data), next(nullptr), prev(nullptr) {}
 };
@@ -55,7 +55,7 @@ public:
     void insertAtBeginning(int data)
     {
         Node *newnode = new Node(data);
-        newnode->prev = nullptr;
+
         if (head == nullptr)
         {
             head = newnode;
@@ -70,7 +70,7 @@ public:
     void insertAtEnd(int data)
     {
         Node *newnode = new Node(data);
-        newnode->next = nullptr;
+
         Node *current = head;
         if (head == nullptr)
         {
@@ -95,7 +95,7 @@ public:
         if (position == 1)
         {
             newNode->next = head;
-            newNode->prev = nullptr;
+        
             if (head != nullptr)
             {
                 head->prev = newNode;
@@ -155,7 +155,7 @@ public:
         if (GivenNode == head)
         {
             newNode->next = head;
-            newNode->prev = nullptr;
+
 
             if (head->next != nullptr)
             {
@@ -205,12 +205,19 @@ public:
         if (head == nullptr)
         {
             cout << "Doubly Linked list is empty!!" << endl;
+            return;
         }
 
         Node *temp = head;
-
-        head = head->next;
-        head->prev = nullptr;
+        if (head->next == nullptr) // if it has only one node
+        {
+            head = nullptr;
+        }
+        else
+        {
+            head = head->next;
+            head->prev = nullptr;
+        }
         delete temp;
     }
 
@@ -221,17 +228,25 @@ public:
         if (head == nullptr)
         {
             cout << "Doubly Linked list is empty!!" << endl;
+            return;
         }
 
         Node *temp, *current = head;
-
-        while (current->next != nullptr)
+        if (head->next == nullptr) // if it has only one node
         {
-            current = current->next;
+            head = nullptr;
+        }
+        else
+        {
+            while (current->next != nullptr)
+            {
+                current = current->next;
+            }
+
+            temp = current->prev;
+            temp->next = current->next;
         }
 
-        temp = current->prev;
-        temp->next = current->next;
         delete current;
     }
 
@@ -343,7 +358,6 @@ public:
             cout << "You are at the end of doubly linked list!!" << endl;
             return;
         }
-        
 
         GivenNode->next = del->next;
 
@@ -374,11 +388,11 @@ int main()
 
     list.traversal();
 
-    // list.deleteFirst();
-    // list.deleteLast();
+    list.deleteFirst();
+    list.deleteLast();
     // list.deleteAtGivenPosition(7);
     // list.deleteAtGivenValue(70);
-    list.deleteAfterGivenValue(70);
+    // list.deleteAfterGivenValue(70);
     list.traversal();
 
     return 0;
