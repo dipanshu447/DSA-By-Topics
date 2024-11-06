@@ -47,6 +47,8 @@ public:
 > Note : It's rarely used in practice due to the complexity they introduce, especially in debugging and portability.
 
 - A skip list is a probabilistic alternative to balanced trees that maintains sorted order and allows efficient search, insert, and delete operations through multiple layers of linked lists.
+
+    - [Orginally proposed by William Pugh in 1989 Article](https://15721.courses.cs.cmu.edu/spring2018/papers/08-oltpindexes1/pugh-skiplists-cacm1990.pdf)
     
     - [Lec 12 | MIT | By Prof. Erik Demaine Fall 2005 (Best Explaination)](https://www.youtube.com/watch?v=kBwUoWpeH_Q)
 
