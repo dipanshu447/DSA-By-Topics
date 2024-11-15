@@ -24,6 +24,13 @@ A tree is a data structure that is similar to linked list but instead of poiting
 
 - The **size** of a node is the number of descendents it has including itself.
 
+## Type of Trees
+
+1) **Binary Tree**
+2) **Binary Search Tree**
+3) **AVL Tree**
+4) **B Tree**
+
 ## Binary Trees
 
 A tree is called Binary tree if each node has zero child, one child or two children. 
@@ -39,6 +46,8 @@ A tree is called Binary tree if each node has zero child, one child or two child
 **Perfect Binary Tree :** A perfect binary tree is a type of binary tree where all interior nodes have two childrens and all leaves have the same depth or same level.
 
 **Skew Binary Tree :** A tree which has only one child (expect leaf nodes), we call such trees skew trees. If every node has only left child then we call them left skew trees. Similarly, if every node has only right child then we call them right skew trees. Skew tree is also called **Degenerate Tree**.
+
+**Balanced Binary Tree :** A binary tree is said to be ‘balanced’ if the height of the tree is O(log n), where ‘n’ represents the number of nodes in the tree. A balanced binary tree, also known as a **height-balanced binary tree**, is defined as a binary tree in which the height difference between the left and right subtrees of any node is not more than 1.
 
 - [Tree Traversal Short and easy trick](https://youtu.be/XRcC7bAtL3c?si=epXDCoNOyA7e826z)
 
