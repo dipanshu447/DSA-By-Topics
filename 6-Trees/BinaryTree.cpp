@@ -63,8 +63,8 @@ public:
     {
         if (rootNode != nullptr)
         {
-            inOrd(rootNode->left);
-            inOrd(rootNode->right);
+            post(rootNode->left);
+            post(rootNode->right);
             cout << rootNode->data << " ";
         }
     }
