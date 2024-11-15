@@ -49,6 +49,20 @@ A tree is called Binary tree if each node has zero child, one child or two child
 
 **Balanced Binary Tree :** A binary tree is said to be ‘balanced’ if the height of the tree is O(log n), where ‘n’ represents the number of nodes in the tree. A balanced binary tree, also known as a **height-balanced binary tree**, is defined as a binary tree in which the height difference between the left and right subtrees of any node is not more than 1.
 
+#### Structure of Binary Trees
+
+```c++
+class TreeNode
+{
+public:
+    int data;
+    TreeNode *left;
+    TreeNode *right;
+
+    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+```
+
 - [Tree Traversal Short and easy trick](https://youtu.be/XRcC7bAtL3c?si=epXDCoNOyA7e826z)
 
 
