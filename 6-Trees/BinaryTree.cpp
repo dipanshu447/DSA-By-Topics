@@ -142,28 +142,27 @@ public:
         }
     }
 
-    // do Level order Traversal
     void lvlOrder(TreeNode *RootNode)
     {
-        if (RootNode == nullptr)
+        if (RootNode == nullptr) // Return if the tree is empty
         {
             return;
         }
-        queue<TreeNode *> Queue;
+        queue<TreeNode *> Queue; // Queue to store tree nodes
         TreeNode *temp;
         Queue.push(RootNode);
-        while (!Queue.empty())
+        while (!Queue.empty()) // Loop runs until the queue is empty
         {
-            temp = Queue.front();
+            temp = Queue.front(); // Retrieve the front node from the queue
             Queue.pop();
-            cout << temp->data << " ";
+            cout << temp->data << " "; // Print the current node's data
             if (temp->left != nullptr)
             {
-                Queue.push(temp->left);
+                Queue.push(temp->left); // Enqueue the left child if it exists
             }
             if (temp->right != nullptr)
             {
-                Queue.push(temp->right);
+                Queue.push(temp->right); // Enqueue the right child if it exists
             }
         }
     }
