@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <queue>
 using namespace std;
 
 class TreeNode
@@ -44,7 +45,7 @@ public:
             pre(rootNode->right);
         }
     }
-    
+
     // void preOrder(){
     //     pre(root);
     // }
@@ -69,12 +70,11 @@ public:
         }
     }
 
-
     void nonrecPost(TreeNode *Rootnode)
     {
-        stack<TreeNode *> s; // stack will store treenode pointers
+        stack<TreeNode *> s;          // stack will store treenode pointers
         TreeNode *previous = nullptr; // track previous nodes
-        do // runs till stack is not empty
+        do                            // runs till stack is not empty
         {
             while (Rootnode != nullptr)
             {
@@ -83,13 +83,13 @@ public:
             }
             while (Rootnode == nullptr && !s.empty()) // processes the tree nodes
             {
-                Rootnode = s.top(); // pop subtree from stack
+                Rootnode = s.top();                                            // pop subtree from stack
                 if (Rootnode->right == nullptr || Rootnode->right == previous) // check if the right substree is already processed or empty
                 {
                     cout << Rootnode->data << " "; // print node data
                     s.pop();
-                    previous = Rootnode; // update previous 
-                    Rootnode = nullptr; // make rootnode null in order to make sure the loop runs next iterations
+                    previous = Rootnode; // update previous
+                    Rootnode = nullptr;  // make rootnode null in order to make sure the loop runs next iterations
                 }
                 else
                 {
@@ -142,8 +142,31 @@ public:
         }
     }
 
-    // do Level order Traversal tmrw
-
+    // do Level order Traversal
+    void lvlOrder(TreeNode *RootNode)
+    {
+        if (RootNode == nullptr)
+        {
+            return;
+        }
+        queue<TreeNode *> Queue;
+        TreeNode *temp;
+        Queue.push(RootNode);
+        while (!Queue.empty())
+        {
+            temp = Queue.front();
+            Queue.pop();
+            cout << temp->data << " ";
+            if (temp->left != nullptr)
+            {
+                Queue.push(temp->left);
+            }
+            if (temp->right != nullptr)
+            {
+                Queue.push(temp->right);
+            }
+        }
+    }
 };
 
 int main()
@@ -173,9 +196,11 @@ int main()
     // cout << endl;
     // t.nonrecInOrd(n1);
 
-    t.post(n1);
-    cout << endl;
-    t.nonrecPost(n1);
+    // t.post(n1);
+    // cout << endl;
+    // t.nonrecPost(n1);
+
+    t.lvlOrder(n1);
 
     return 0;
 }
