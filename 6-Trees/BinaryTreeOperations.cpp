@@ -98,11 +98,11 @@ public:
 
     void Insert(int data)
     {
-        TreeNode *newNode = new TreeNode(data);
+        TreeNode *newNode = new TreeNode(data); // Create new node to be added
         TreeNode *current = root;
         if (root == nullptr)
         {
-            root = newNode;
+            root = newNode; // If the tree is empty, the new node becomes the root
             return;
         }
         else
@@ -110,10 +110,11 @@ public:
             char choice;
             while (true)
             {
-                cout << "Curent Node :  " << current->data << endl;
-                cout << "New Node :  " << newNode->data << endl;
+                cout << "Curent Node :  " << current->data << endl; // Shows the current node
+                cout << "New Node :  " << newNode->data << endl; // Shows the new node to be inserted
                 cout << "Enter the left(L) or right node(R) or (N) to insert here: " << endl;
                 cin >> choice;
+                // Traverse the tree based on user input or insert if user chooses 'N'
                 if (choice == 'L' || choice == 'l')
                 {
                     if (current->left != nullptr)
@@ -126,7 +127,7 @@ public:
                         break;
                     }
                 }
-                else if (choice == 'r' || choice == 'R')
+                else if (choice == 'r' || choice == 'R') 
                 {
                     if (current->right != nullptr)
                     {
@@ -140,6 +141,7 @@ public:
                 }
                 else if (choice == 'n' || choice == 'N')
                 {
+                     // Insert at the current node if no left or right child exists
                     cout << "Insert as left(l) or right(r) child : " << endl;
                     cin >> choice;
                     if (choice == 'l' || choice == 'L')
@@ -174,65 +176,102 @@ public:
         }
     }
 
-    void Delection(){ // half done NOT WORKING yet It cant delete child nodes. It can only delete root node 
-        TreeNode *current = root;
+    void Delection()
+    {
+        TreeNode *current = root; // traverse current node 
+        TreeNode *parent = nullptr; // track the parent noe of current
+        TreeNode *grandparent = nullptr; // Track the grandparent node for backtracking (Its neeeded so that we can traverse back)
+        bool running = true;
         char choice;
         if (root == nullptr)
         {
             cout << "Tree is empty nothing to delete" << endl;
             return;
         }
-        else
+        while (running) // runs till user choose to exit 
         {
-            while (true)
+            cout << "Current node : " << current->data << endl;
+            cout << "Move the left(L) or right node(R) or delete this node (D), go back (B), Exit(E) here: " << endl;
+            cin >> choice;
+            // traverse the tree based on user inputs and tracks the parent and grandparent nodes
+            if (choice == 'L' || choice == 'l')
             {
-                cout << "Curent Node :  " << current->data << endl;
-                cout << "Delete this node (Y/N) : " << endl;
-                cin >> choice;
-                if(choice == 'Y' || choice == 'y'){
-                    if(current == root){
-                        delete root;
-                        root = nullptr;
-                        cout << "Root node deleted" << endl;
-                        return;
-                    }
-                    else {
-                        cout << "Cannot delete this node as root" << endl;
-                    }
-                }
-
-                cout << "Move the left(L) or right node(R) or (N) to insert here: " << endl;
-                cin >> choice;
-                if (choice == 'L' || choice == 'l')
+                if (current->left != nullptr)
                 {
-                    if (current->left != nullptr)
-                    {
-                        current = current->left;
-                    }
-                    else
-                    {
-                        delete current->left;
-                        current->left = nullptr;
-                        break;
-                    }
-                }
-                else if (choice == 'r' || choice == 'R')
-                {
-                    if (current->right != nullptr)
-                    {
-                        current = current->right;
-                    }
-                    else
-                    {
-                        delete current->right;
-                        current->right = nullptr;
-                        break;
-                    }
+                    grandparent = parent;
+                    parent = current;
+                    current = current->left;
                 }
                 else
                 {
-                    cout << "INVALID CHOICE" << endl;
+                    cout << "Left child is already null" << endl;
                 }
+            }
+            else if (choice == 'r' || choice == 'R')
+            {
+                if (current->right != nullptr)
+                {
+                    grandparent = parent;
+                    parent = current;
+                    current = current->right;
+                }
+                else
+                {
+                    cout << "Right child is already null" << endl;
+                }
+            }
+            // so that user can traverse back to parent or grandparent node
+            else if (choice == 'B' || choice == 'b')
+            {
+                if (parent != nullptr)
+                {
+                    current = parent;
+                    parent = grandparent;
+                    grandparent = nullptr;
+                }
+                else
+                {
+                    cout << "Already at the root node, cannot go back further!!" << endl;
+                }
+            }
+            else if (choice == 'D' || choice == 'd')
+            {
+                if (current == root)
+                {
+                    delete root; // Delete the root node
+                    root = nullptr;
+                    cout << "Root node deleted" << endl;
+                    return;
+                }
+                else
+                {
+                    if (parent != nullptr)
+                    {
+                        if (parent->left == current)
+                        {
+                            delete current; // Delete the left child
+                            parent->left = nullptr;
+                            cout << "Left child deleted" << endl;
+                        }
+                        else if (parent->right == current)
+                        {
+                            delete current; // Delete the right child
+                            parent->right = nullptr;
+                            cout << "Right child deleted" << endl;
+                        }
+                        current = parent;
+                        parent = grandparent;
+                        grandparent = nullptr;
+                    }
+                }
+            }
+            else if (choice == 'E' || choice == 'e')
+            {
+                running = false;
+            }
+            else
+            {
+                cout << "INVALID CHOICE" << endl;
             }
         }
     }
@@ -254,7 +293,6 @@ int main()
     t.Insert(40);
 
     t.Delection();
-
 
     return 0;
 }
