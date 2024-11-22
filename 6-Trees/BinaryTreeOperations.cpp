@@ -73,6 +73,61 @@ private:
         }
     }
 
+    bool search(TreeNode *rootNode, int target)
+    {
+        if (rootNode == nullptr)
+        {
+            return false;
+        }
+        if (rootNode->data == target)
+        {
+            return true;
+        }
+        return search(rootNode->left, target) || search(rootNode->right, target);
+    }
+
+    bool searchIterative(TreeNode *rootNode, int target)
+    {
+        if (rootNode == nullptr)
+        {
+            return false;
+        }
+
+        queue<TreeNode *> q;
+        q.push(rootNode);
+
+        while (!q.empty())
+        {
+            TreeNode *current = q.front();
+            q.pop();
+
+            if (current->data == target)
+            {
+                return true;
+            }
+
+            if (current->left != nullptr)
+            {
+                q.push(current->left); // Add left child to queue
+            }
+            if (current->right != nullptr)
+            {
+                q.push(current->right); // Add right child to queue
+            }
+        }
+        return false;
+    }
+
+    int recurSize(TreeNode *rootNode)
+    {
+        if (rootNode == nullptr)
+        {
+            return 0;
+        }
+
+        return recurSize(rootNode->left) + recurSize(rootNode->right) + 1;
+    }
+
 public:
     Tree() : root(nullptr) {}
 
@@ -111,7 +166,7 @@ public:
             while (true)
             {
                 cout << "Curent Node :  " << current->data << endl; // Shows the current node
-                cout << "New Node :  " << newNode->data << endl; // Shows the new node to be inserted
+                cout << "New Node :  " << newNode->data << endl;    // Shows the new node to be inserted
                 cout << "Enter the left(L) or right node(R) or (N) to insert here: " << endl;
                 cin >> choice;
                 // Traverse the tree based on user input or insert if user chooses 'N'
@@ -127,7 +182,7 @@ public:
                         break;
                     }
                 }
-                else if (choice == 'r' || choice == 'R') 
+                else if (choice == 'r' || choice == 'R')
                 {
                     if (current->right != nullptr)
                     {
@@ -141,7 +196,7 @@ public:
                 }
                 else if (choice == 'n' || choice == 'N')
                 {
-                     // Insert at the current node if no left or right child exists
+                    // Insert at the current node if no left or right child exists
                     cout << "Insert as left(l) or right(r) child : " << endl;
                     cin >> choice;
                     if (choice == 'l' || choice == 'L')
@@ -178,8 +233,8 @@ public:
 
     void Delection()
     {
-        TreeNode *current = root; // traverse current node 
-        TreeNode *parent = nullptr; // track the parent noe of current
+        TreeNode *current = root;        // traverse current node
+        TreeNode *parent = nullptr;      // track the parent noe of current
         TreeNode *grandparent = nullptr; // Track the grandparent node for backtracking (Its neeeded so that we can traverse back)
         bool running = true;
         char choice;
@@ -188,7 +243,7 @@ public:
             cout << "Tree is empty nothing to delete" << endl;
             return;
         }
-        while (running) // runs till user choose to exit 
+        while (running) // runs till user choose to exit
         {
             cout << "Current node : " << current->data << endl;
             cout << "Move the left(L) or right node(R) or delete this node (D), go back (B), Exit(E) here: " << endl;
@@ -275,6 +330,41 @@ public:
             }
         }
     }
+
+    bool Search(int targetValue)
+    {
+        return search(root, targetValue);
+    }
+
+    bool SearchIterative(int targetValue)
+    {
+        return searchIterative(root, targetValue);
+    }
+
+    int size()
+    { // basically its a preorder traversal but it counts nodes
+        TreeNode *current = root;
+        int count = 0;
+        stack<TreeNode *> s;
+        while (!s.empty() || current != nullptr)
+        {
+            while (current != nullptr)
+            {
+                count++;
+                s.push(current);
+                current = current->left;
+            }
+            current = s.top();
+            s.pop();
+            current = current->right;
+        }
+        return count;
+    }
+
+    int SizeRecursive()
+    {
+        return recurSize(root);
+    }
 };
 
 int main()
@@ -291,8 +381,21 @@ int main()
     t.Insert(20);
     t.Insert(30);
     t.Insert(40);
+    t.Insert(50);
 
-    t.Delection();
+    // TreeNode *root = new TreeNode(10);
+    // root->left = new TreeNode(20);
+    // root->right = new TreeNode(30);
+    // root->left->left= new TreeNode(40);
+    cout << "Size of tree is : " << t.size() << endl;
+    // t.Delection();
+
+    // if (t.SearchIterative(40))
+    // {
+    //     cout << "Damn bro i found it " << endl;
+    // }else {
+    //     cout << "Nah bro its not there" << endl;
+    // }
 
     return 0;
 }
