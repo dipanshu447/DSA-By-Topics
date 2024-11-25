@@ -365,6 +365,37 @@ public:
     {
         return recurSize(root);
     }
+
+    int height()
+    {
+        TreeNode *current;
+        int height = 0;
+        queue<TreeNode *> q;
+        q.push(root);
+        while (!q.empty())
+        {
+            int levelSize = q.size();
+            for (int i = 0; i < levelSize; ++i)
+            {
+                current = q.front();
+                q.pop();
+
+                if (current->left != nullptr)
+                {
+                    q.push(current->left);
+                }
+                if (current->right != nullptr)
+                {
+                    q.push(current->right);
+                }
+            }
+            if (!q.empty())
+            {
+                ++height;
+            }
+        }
+        return height;
+    }
 };
 
 int main()
@@ -374,20 +405,25 @@ int main()
     //    10
     //   /  \ 
     //  20  30
-    //  /
-    // 40
+    //  /    \ 
+    // 40    50
+    // /      \ 
+//    60      70
 
     t.Insert(10);
     t.Insert(20);
     t.Insert(30);
     t.Insert(40);
     t.Insert(50);
+    t.Insert(60);
+    t.Insert(70);
+    cout << "Height of the tree : " << t.height() << endl;
 
     // TreeNode *root = new TreeNode(10);
     // root->left = new TreeNode(20);
     // root->right = new TreeNode(30);
     // root->left->left= new TreeNode(40);
-    cout << "Size of tree is : " << t.size() << endl;
+    // cout<< "Size of tree is : " << t.size() << endl;
     // t.Delection();
 
     // if (t.SearchIterative(40))
