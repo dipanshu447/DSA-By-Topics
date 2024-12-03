@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <queue>
+#include <vector>
 using namespace std;
 
 class TreeNode
@@ -396,6 +397,51 @@ public:
         }
         return height;
     }
+
+    int MaxNumLvl()
+    {
+        if (root == nullptr)
+        {
+            return 0;
+        }
+        queue<TreeNode *> nodes;
+        int maxSum = INT16_MIN;
+        int maxLevel = 0;
+        int currentLvl = 0;
+        nodes.push(root);
+        while (!nodes.empty())
+        {
+            int levelSize = nodes.size();
+            int levelSum = 0;
+
+            for (int i = 0; i < levelSize; i++)
+            {
+                TreeNode *cur = nodes.front();
+                nodes.pop();
+
+                levelSum += cur->data;
+
+                if (cur->left != nullptr)
+                {
+                    nodes.push(cur->left);
+                }
+
+                if (cur->right != nullptr)
+                {
+                    nodes.push(cur->right);
+                }
+            }
+
+            if(levelSum > maxSum){
+                maxSum = levelSum;
+                maxLevel = currentLvl;
+            }
+
+            currentLvl++;
+        }
+       
+        return maxLevel;
+    }
 };
 
 int main()
@@ -408,7 +454,7 @@ int main()
     //  /    \ 
     // 40    50
     // /      \ 
-//    60      70
+   // 60      70
 
     t.Insert(10);
     t.Insert(20);
@@ -417,7 +463,8 @@ int main()
     t.Insert(50);
     t.Insert(60);
     t.Insert(70);
-    cout << "Height of the tree : " << t.height() << endl;
+    // cout << "Height of the tree : " << t.height() << endl;
+    cout << "Level of the tree which has the maximum sum: " << t.MaxNumLvl() << endl;
 
     // TreeNode *root = new TreeNode(10);
     // root->left = new TreeNode(20);
