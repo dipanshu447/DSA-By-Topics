@@ -28,13 +28,13 @@ public:
         root->addChild(child2);
         root->addChild(child3);
 
-        TreeNode *child2_1 = new TreeNode(5);
-        TreeNode *child2_2 = new TreeNode(6);
-        TreeNode *child2_3 = new TreeNode(7);
+        TreeNode *child1_1 = new TreeNode(5);
+        TreeNode *child1_2 = new TreeNode(6);
+        TreeNode *child1_3 = new TreeNode(7);
 
-        child2->addChild(child2_1);
-        child2->addChild(child2_2);
-        child2->addChild(child2_3);
+        child1->addChild(child1_1);
+        child1->addChild(child1_2);
+        child1->addChild(child1_3);
 
         return root;
     }
@@ -58,40 +58,23 @@ public:
         }
     }
 
-    // void inOrder(TreeNode *Root)
-    // {
-    //     if (Root == nullptr)
-    //     {
-    //         return;
-    //     }
-
-    //     int n = Root->child.size();
-    //     for (int i = 0; i < n - 1; i++)
-    //     {
-    //         inOrder(Root->child[i]);
-    //     }
-
-    //     cout << Root->data << " ";
-    //     if (n > 0)
-    //     {
-    //         inOrder(Root->child[n - 1]);
-    //     }
-    // }
     void inOrder(TreeNode *Root)
     {
         if (Root == nullptr)
         {
             return;
         }
-        if (!Root->child.empty())
-        {
-            inOrder(Root->child[0]);
-        }
-        
-        cout << Root->data << " ";
-        for (int i = 1; i < Root->child.size(); i++)
+
+        int n = Root->child.size();
+        for (int i = 0; i < n - 1; i++)
         {
             inOrder(Root->child[i]);
+        }
+
+        cout << Root->data << " ";
+        if (n > 0)
+        {
+            inOrder(Root->child[n - 1]);
         }
     }
 };
